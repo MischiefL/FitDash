@@ -3,205 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitDash Pro: Recomposición</title>
+    <title>Robin OS | Centro de Mando</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
-        :root { 
-            --orange: #f97316; --blue: #3b82f6; --red: #ef4444; 
-            --green: #22c55e; --black: #0f172a; --white: #ffffff;
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
         }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: var(--black); }
-        .day-btn.active { background-color: var(--orange); color: white; border-color: var(--orange); }
-        .exercise-item.done { border-color: var(--green); background-color: #f0fdf4; }
-        .exercise-item.done .check-box { background-color: var(--green); border-color: var(--green); color: white; }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+        }
+
+        .active-day {
+            border: 2px solid #3b82f6 !important;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(30, 41, 59, 0.7) 100%) !important;
+        }
+
+        .active-badge {
+            display: inline-flex;
+            background: #3b82f6;
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 99px;
+            text-transform: uppercase;
+            margin-left: 8px;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="min-h-screen p-4 md:p-10">
 
     <div class="max-w-6xl mx-auto">
-        <header class="mb-8 flex flex-col md:flex-row justify-between items-center bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-            <div class="flex items-center gap-4">
-                <div class="bg-black text-white p-3 rounded-2xl font-black text-xl italic">FD</div>
-                <div>
-                    <h1 class="text-2xl font-extrabold tracking-tighter uppercase italic">FitDash <span class="text-orange-500">Recomposición</span></h1>
-                    <p class="text-slate-400 font-bold text-xs uppercase tracking-widest">Plan: Robin / Naruto</p>
+        <!-- Main Header -->
+        <header class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+            <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
+                    <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                        <i class="fas fa-terminal text-white"></i>
+                    </div>
+                    <h1 class="text-3xl font-extrabold tracking-tighter uppercase italic">Robin<span class="text-blue-500">OS</span></h1>
+                </div>
+                <p class="text-slate-400 text-sm font-medium">Hardware Optimization Protocol v2.5</p>
+            </div>
+            
+            <div class="glass-card px-6 py-3 rounded-2xl flex items-center gap-6">
+                <div class="text-center">
+                    <p class="text-[10px] text-slate-500 font-bold uppercase">Status</p>
+                    <p class="text-xs font-bold text-emerald-400">Online</p>
+                </div>
+                <div class="w-px h-8 bg-slate-700"></div>
+                <div class="text-center">
+                    <p class="text-[10px] text-slate-500 font-bold uppercase">Goal</p>
+                    <p class="text-xs font-bold text-blue-400 italic">10K OCT</p>
                 </div>
             </div>
-            <div class="flex gap-2 overflow-x-auto w-full md:w-auto mt-4 md:mt-0" id="daySelector"></div>
         </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <div class="lg:col-span-8 space-y-6">
-                <section class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                    <div class="flex justify-between items-center mb-8">
-                        <div>
-                            <h2 id="currentDayTitle" class="text-3xl font-black text-slate-900 uppercase italic">Lunes</h2>
-                            <p id="dayFocus" class="text-blue-500 font-bold text-sm uppercase"></p>
+        <!-- Weekly Training Grid -->
+        <section class="mb-16">
+            <h2 class="text-xs font-bold text-slate-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
+                <i class="fas fa-calendar-alt text-blue-500"></i> Ciclo de Entrenamiento
+            </h2>
+            <div class="nav-grid" id="weekly-grid">
+                <!-- Lunes -->
+                <a href="rutina_lunes_superior.html" id="day-1" class="glass-card p-6 rounded-3xl flex items-center justify-between group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center text-sky-400 group-hover:bg-sky-500 group-hover:text-white transition-all">
+                            <i class="fas fa-dumbbell"></i>
                         </div>
-                        <div class="text-right">
-                            <p class="text-[10px] font-bold text-slate-400 uppercase">Calentamiento</p>
-                            <p id="warmupText" class="text-xs font-bold bg-slate-100 px-3 py-1 rounded-full"></p>
+                        <div>
+                            <h3 class="font-bold text-slate-200">Lunes</h3>
+                            <p class="text-[10px] text-slate-500 uppercase tracking-wider">Espalda & Tríceps</p>
                         </div>
                     </div>
+                    <i class="fas fa-chevron-right text-slate-700 group-hover:text-sky-500"></i>
+                </a>
 
-                    <div id="routineContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Martes -->
+                <a href="rutina_martes_inferior.html" id="day-2" class="glass-card p-6 rounded-3xl flex items-center justify-between group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center text-orange-400 group-hover:bg-orange-500 group-hover:text-white transition-all">
+                            <i class="fas fa-running"></i>
                         </div>
-                </section>
-
-                <section class="bg-slate-900 text-white rounded-[2.5rem] p-8 shadow-xl relative overflow-hidden">
-                    <div class="relative z-10 flex flex-col md:row justify-between gap-6">
                         <div>
-                            <h3 class="text-blue-400 font-black uppercase tracking-widest text-sm mb-4">Prescripción de Cardio</h3>
-                            <p id="cardioText" class="text-2xl font-bold mb-2"></p>
-                            <p class="text-slate-400 text-xs italic">Mantener ritmo constante según guía técnica.</p>
-                        </div>
-                        <div class="bg-blue-500/10 border border-blue-500/20 p-4 rounded-2xl">
-                            <h4 class="text-white font-bold text-xs uppercase mb-2">Guía Técnica</h4>
-                            <div class="grid grid-cols-2 gap-4 text-[10px]">
-                                <div><span class="text-blue-400">Bici:</span> Niv 6-9 (Cardio)</div>
-                                <div><span class="text-orange-400">Trote:</span> 4.0 - 4.2 mph</div>
-                            </div>
+                            <h3 class="font-bold text-slate-200">Martes</h3>
+                            <p class="text-[10px] text-slate-500 uppercase tracking-wider">Piernas & Intervalos</p>
                         </div>
                     </div>
-                </section>
+                    <i class="fas fa-chevron-right text-slate-700 group-hover:text-orange-500"></i>
+                </a>
+
+                <!-- Miercoles -->
+                <a href="rutina_miercoles_core.html" id="day-3" class="glass-card p-6 rounded-3xl flex items-center justify-between group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-200">Miércoles</h3>
+                            <p class="text-[10px] text-slate-500 uppercase tracking-wider">Power Walk & Core</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right text-slate-700 group-hover:text-emerald-500"></i>
+                </a>
+
+                <!-- Jueves -->
+                <a href="rutina_jueves_brazos.html" id="day-4" class="glass-card p-6 rounded-3xl flex items-center justify-between group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-all">
+                            <i class="fas fa-user-ninja"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-200">Jueves</h3>
+                            <p class="text-[10px] text-slate-500 uppercase tracking-wider">Brazos & Postura</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right text-slate-700 group-hover:text-indigo-500"></i>
+                </a>
+
+                <!-- Viernes -->
+                <a href="rutina_viernes_fullbody.html" id="day-5" class="glass-card p-6 rounded-3xl flex items-center justify-between group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center text-rose-400 group-hover:bg-rose-500 group-hover:text-white transition-all">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-200">Viernes</h3>
+                            <p class="text-[10px] text-slate-500 uppercase tracking-wider">Full Body Circuit</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right text-slate-700 group-hover:text-rose-500"></i>
+                </a>
+
+                <!-- Sabado -->
+                <a href="rutina_sabado_lsr.html" id="day-6" class="glass-card p-6 rounded-3xl flex items-center justify-between group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-200">Sábado</h3>
+                            <p class="text-[10px] text-slate-500 uppercase tracking-wider">Carrera Larga (LSR)</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right text-slate-700 group-hover:text-blue-600"></i>
+                </a>
+
+                <!-- Domingo -->
+                <div id="day-0" class="glass-card p-6 rounded-3xl flex items-center justify-between group cursor-default">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center text-slate-400">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-200">Domingo</h3>
+                            <p class="text-[10px] text-slate-500 uppercase tracking-wider">Mantenimiento & Rest</p>
+                        </div>
+                    </div>
+                    <span class="text-[8px] bg-slate-800 px-2 py-1 rounded text-slate-500 font-bold uppercase">Sleep Mode</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Protocols & Biohacking -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+                <h2 class="text-xs font-bold text-slate-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
+                    <i class="fas fa-microchip text-blue-500"></i> Protocolos de Control
+                </h2>
+                <div class="space-y-4">
+                    <a href="protocolo_agilidad_control.html" class="glass-card p-5 rounded-2xl flex items-center gap-4 group">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="text-xs font-bold text-slate-200">Agilidad & TDAH</h4>
+                            <p class="text-[10px] text-slate-500 italic">Ejercicios de propriocepción y control.</p>
+                        </div>
+                    </a>
+                    <a href="protocolo_alivio_mandibular.html" class="glass-card p-5 rounded-2xl flex items-center gap-4 group">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                            <i class="fas fa-tooth"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="text-xs font-bold text-slate-200">Mandíbula & Perfilado</h4>
+                            <p class="text-[10px] text-slate-500 italic">Adiós al bruxismo y tensión facial.</p>
+                        </div>
+                    </a>
+                </div>
             </div>
 
-            <aside class="lg:col-span-4 space-y-6">
-                <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
-                    <h3 class="font-bold mb-6 flex items-center gap-2 text-slate-800 italic">📝 LOG DIARIO</h3>
-                    <div class="space-y-4">
-                        <input type="text" id="logReps" placeholder="Sets y Reps (Ej: 4x15)" class="w-full p-3 bg-slate-50 border-none rounded-2xl text-sm focus:ring-2 focus:ring-orange-500">
-                        <input type="text" id="logCardio" placeholder="Minutos y Velocidad" class="w-full p-3 bg-slate-50 border-none rounded-2xl text-sm focus:ring-2 focus:ring-blue-500">
-                        <textarea id="logNotes" rows="2" placeholder="¿Cómo te sentiste?" class="w-full p-3 bg-slate-50 border-none rounded-2xl text-sm focus:ring-2 focus:ring-slate-900"></textarea>
-                        <button onclick="saveLog()" id="btnSaveLog" class="w-full py-4 bg-black text-white font-black rounded-2xl hover:bg-orange-600 transition-all shadow-lg uppercase text-xs tracking-widest">Guardar Sesión</button>
+            <div>
+                <h2 class="text-xs font-bold text-slate-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
+                    <i class="fas fa-flask text-blue-500"></i> Optimización Química
+                </h2>
+                <div class="space-y-4">
+                    <a href="plan_suplementos_robin.html" class="glass-card p-5 rounded-2xl flex items-center gap-4 group">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="text-xs font-bold text-slate-200">Plan de Suplementos</h4>
+                            <p class="text-[10px] text-slate-500 italic">Cronograma de vitaminas y adaptógenos.</p>
+                        </div>
+                    </a>
+                    <div class="glass-card p-5 rounded-2xl flex items-center gap-4 opacity-60">
+                        <div class="w-10 h-10 rounded-xl bg-slate-500/10 text-slate-400 flex items-center justify-center">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="text-xs font-bold text-slate-200">Análisis de Progreso</h4>
+                            <p class="text-[10px] text-slate-500 italic">Próximamente: Conexión con datos.</p>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="bg-orange-50 p-6 rounded-3xl border border-orange-100">
-                    <h3 class="font-bold mb-4 flex items-center gap-2 text-orange-700 italic">⚖️ CONTROL DE PESO</h3>
-                    <div class="flex gap-2">
-                        <input type="number" id="inputWeight" step="0.1" placeholder="71.1" class="flex-1 p-3 bg-white border-none rounded-2xl text-sm focus:ring-2 focus:ring-orange-500">
-                        <button onclick="saveWeight()" class="bg-orange-500 text-white px-4 rounded-2xl font-bold hover:bg-orange-600 transition-all">OK</button>
-                    </div>
-                    <p class="text-[10px] text-orange-600 mt-3 font-bold uppercase tracking-tighter">* Registro recomendado cada lunes en ayunas.</p>
-                </div>
-
-                <div class="bg-green-50 p-6 rounded-3xl border border-green-100">
-                    <h4 class="text-green-700 font-bold uppercase text-xs mb-2 italic">Tip Naruto del Día</h4>
-                    <p id="dailyTip" class="text-xs leading-relaxed text-green-800 italic"></p>
-                </div>
-            </aside>
-        </div>
+        <!-- Footer -->
+        <footer class="mt-20 text-center border-t border-slate-800 pt-10 pb-10">
+            <p class="text-[9px] text-slate-600 font-bold uppercase tracking-[0.3em]">
+                Robin Architecture • Built for 10K Endurance • Dattebayo
+            </p>
+        </footer>
     </div>
 
     <script>
-        // --- CONFIGURACIÓN SUPABASE ---
-        const SUPABASE_URL = 'https://rgztmzsmfbywmmxbybfm.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_4YP6erNDeC6mB-i54NtJHg_c4en_vKm';
-        const supabase = exports = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-        const plan = {
-            "Lunes": {
-                focus: "Espalda y Tríceps", warmup: "3.1 mph | 10 min",
-                exercises: [
-                    {n: "Remo inclinado", r: "15 reps", img: "https://images.unsplash.com/photo-1598971639058-aba3cba81db5?auto=format&fit=crop&q=60&w=200"},
-                    {n: "Copa de Tríceps", r: "15 reps", img: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&q=60&w=200"}
-                ],
-                cardio: "Bicicleta Resistencia 7 | 15 min", tip: "Postura Robin: Hombros abajo para evitar falsa papada."
-            },
-            "Martes": {
-                focus: "Piernas (Fuerza Base)", warmup: "2.8 mph | 5 min",
-                exercises: [
-                    {n: "Sentadillas", r: "20 reps", img: "https://images.unsplash.com/photo-1574673001865-4527bc33c945?auto=format&fit=crop&q=60&w=200"},
-                    {n: "Desplantes", r: "12 por pierna", img: "https://images.unsplash.com/photo-1590239068512-63276724babd?auto=format&fit=crop&q=60&w=200"}
-                ],
-                cardio: "HIIT: 1 min Res 13 / 1 min Res 4 (10 veces)", tip: "Hidrátate bien en Tampico con electrolitos."
-            },
-            "Jueves": {
-                focus: "Brazos y Postura", warmup: "Bicicleta Res 5 | 10 min",
-                exercises: [
-                    {n: "Press Militar", r: "12 reps", img: "https://images.unsplash.com/photo-1541534741688-6078c6bc35e5?auto=format&fit=crop&q=60&w=200"},
-                    {n: "Push-ups (Rodillas)", r: "Al fallo", img: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=60&w=200"}
-                ],
-                cardio: "Trote Base: 4.2 mph | 25 min", tip: "El colágeno mantiene la firmeza de tu rostro y brazos."
-            }
-            // Agrega aquí el resto de los días siguiendo el mismo formato...
-        };
-
-        let currentDay = "Lunes";
-
-        function init() {
-            const selector = document.getElementById('daySelector');
-            Object.keys(plan).forEach(day => {
-                const btn = document.createElement('button');
-                btn.innerText = day.substring(0, 3);
-                btn.className = `day-btn px-4 py-2 rounded-2xl text-[10px] font-black uppercase transition-all border-2 border-slate-100`;
-                btn.onclick = () => setDay(day);
-                btn.id = `btn-${day}`;
-                selector.appendChild(btn);
-            });
-            const today = new Date().toLocaleDateString('es-ES', {weekday: 'long'});
-            setDay(today.charAt(0).toUpperCase() + today.slice(1));
-        }
-
-        function setDay(day) {
-            if(!plan[day]) day = "Lunes";
-            currentDay = day;
-            document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(`btn-${day}`)?.classList.add('active');
+        // Lógica para detectar el día actual y resaltarlo
+        const now = new Date();
+        const dayOfWeek = now.getDay(); // 0 (Dom) a 6 (Sab)
+        
+        const currentDayElement = document.getElementById(`day-${dayOfWeek}`);
+        if (currentDayElement) {
+            currentDayElement.classList.add('active-day');
             
-            document.getElementById('currentDayTitle').innerText = day;
-            document.getElementById('dayFocus').innerText = plan[day].focus;
-            document.getElementById('warmupText').innerText = plan[day].warmup;
-            document.getElementById('cardioText').innerText = plan[day].cardio;
-            document.getElementById('dailyTip').innerText = plan[day].tip;
-
-            const container = document.getElementById('routineContainer');
-            container.innerHTML = "";
-            plan[day].exercises.forEach(ex => {
-                const div = document.createElement('div');
-                div.className = "exercise-item group flex items-center gap-4 p-4 bg-white border-2 border-slate-50 rounded-2xl cursor-pointer transition-all hover:border-blue-100";
-                div.onclick = () => div.classList.toggle('done');
-                div.innerHTML = `
-                    <img src="${ex.img}" class="w-16 h-16 rounded-xl object-cover border border-slate-100">
-                    <div class="flex-1">
-                        <p class="font-black text-sm uppercase tracking-tighter">${ex.n}</p>
-                        <p class="text-xs text-slate-400 font-bold">${ex.r}</p>
-                    </div>
-                    <div class="check-box w-6 h-6 border-2 border-slate-200 rounded-full flex items-center justify-center text-[10px]">✓</div>
-                `;
-                container.appendChild(div);
-            });
+            // Agregar el badge de "Hoy"
+            const titleDiv = currentDayElement.querySelector('h3');
+            const badge = document.createElement('span');
+            badge.className = 'active-badge';
+            badge.innerText = 'Hoy';
+            titleDiv.appendChild(badge);
         }
-
-        async function saveLog() {
-            const btn = document.getElementById('btnSaveLog');
-            btn.innerText = "Guardando...";
-            const { error } = await supabase.from('workout_logs').insert([{
-                day: currentDay,
-                reps: document.getElementById('logReps').value,
-                cardio: document.getElementById('logCardio').value,
-                notes: document.getElementById('logNotes').value
-            }]);
-            
-            if (error) alert("Error: " + error.message);
-            else {
-                alert("¡Entrenamiento guardado!");
-                btn.innerText = "Guardar Sesión";
-            }
-        }
-
-        async function saveWeight() {
-            const weight = document.getElementById('inputWeight').value;
-            if(!weight) return;
-            const { error } = await supabase.from('weight_logs').insert([{ weight: parseFloat(weight) }]);
-            if (error) alert(error.message);
-            else alert("Peso registrado: " + weight + "kg");
-        }
-
-        window.onload = init;
     </script>
 </body>
 </html>
