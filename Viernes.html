@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Técnica Definitiva: Viernes Full Body</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #fdfbf7;
+            color: #3d405b;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 250px;
+        }
+
+        .glass-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 20px rgba(61, 64, 91, 0.05);
+            border: 1px solid #f1f1f1;
+        }
+
+        .bg-sage { background-color: #81b29a; }
+        .text-sage { color: #81b29a; }
+        .bg-terracotta { background-color: #e07a5f; }
+        .bg-navy { background-color: #3d405b; }
+        
+        .step-number {
+            @apply w-8 h-8 rounded-full bg-navy text-white flex items-center justify-center font-bold text-sm shrink-0;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Viernes: <span class="text-sage">Técnica Maestra</span></h1>
+            <p class="text-slate-500 font-medium uppercase tracking-widest text-xs mt-2 italic">Optimización de Forma y Ejecución • 10K Prep</p>
+        </header>
+
+        <!-- Section 1: Detailed Circuit -->
+        <section class="mb-16">
+            <div class="flex items-center gap-2 mb-8">
+                <span class="text-3xl">🏋️‍♀️</span>
+                <h2 class="text-2xl font-bold text-slate-800">Circuito Metabólico (4 Vueltas)</h2>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6">
+                <!-- Exercise 1 -->
+                <div class="glass-card p-6 md:p-8 border-l-8 border-terracotta">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="step-number">1</div>
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">Sentadilla con Press de Hombro</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-600">
+                                <div>
+                                    <p class="font-bold text-navy mb-1">Cómo hacerlo bien:</p>
+                                    <ul class="list-disc pl-4 space-y-1">
+                                        <li>Pies al ancho de hombros, puntas ligeramente hacia afuera.</li>
+                                        <li>Baja la cadera manteniendo el pecho "orgulloso" (no te encorves).</li>
+                                        <li>Al subir, usa el impulso de tus piernas para empujar las pesas hacia el techo.</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-terracotta/5 p-4 rounded-xl border border-terracotta/20">
+                                    <p class="font-bold text-terracotta mb-1 italic">Señal de error:</p>
+                                    <p class="text-xs">Si tus talones se levantan del suelo, estás bajando mal. Todo el peso debe estar en los talones. Imagina que te sientas en una silla lejana.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 2 -->
+                <div class="glass-card p-6 md:p-8 border-l-8 border-navy">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="step-number">2</div>
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">Remo Inclinado (Back Sculpt)</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-600">
+                                <div>
+                                    <p class="font-bold text-navy mb-1">Cómo hacerlo bien:</p>
+                                    <ul class="list-disc pl-4 space-y-1">
+                                        <li>Inclina el torso 45 grados. Rodillas un poco dobladas.</li>
+                                        <li>Espalda plana como una mesa (saca pompa).</li>
+                                        <li>Jala las pesas hacia tu ombligo, no hacia el pecho.</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-navy/5 p-4 rounded-xl border border-navy/20">
+                                    <p class="font-bold text-navy mb-1 italic">Señal de error:</p>
+                                    <p class="text-xs">Si sientes tensión en el cuello, estás jalando muy arriba. Enfócate en "juntar las alitas" (escápulas) de la espalda al final del movimiento.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 3 -->
+                <div class="glass-card p-6 md:p-8 border-l-8 border-sage">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="step-number">3</div>
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">Fondos (Dips) - Adiós flacidez</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-600">
+                                <div>
+                                    <p class="font-bold text-navy mb-1">Cómo hacerlo bien:</p>
+                                    <ul class="list-disc pl-4 space-y-1">
+                                        <li>Manos en una silla estable o agarraderas.</li>
+                                        <li>Baja pegando tu espalda lo más posible al apoyo.</li>
+                                        <li>Los codos deben apuntar hacia atrás, NUNCA hacia afuera.</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-sage/10 p-4 rounded-xl border border-sage/20">
+                                    <p class="font-bold text-sage mb-1 italic">Señal de error:</p>
+                                    <p class="text-xs">Si te duelen los hombros, estás bajando demasiado. Quédate en 90 grados y concéntrate en empujar fuerte con la parte trasera del brazo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 4 -->
+                <div class="glass-card p-6 md:p-8 border-l-8 border-amber-500">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="step-number">4</div>
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">Step-ups (Fuerza de Carrera)</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-600">
+                                <div>
+                                    <p class="font-bold text-navy mb-1">Cómo hacerlo bien:</p>
+                                    <ul class="list-disc pl-4 space-y-1">
+                                        <li>Coloca un pie firme en el escalón.</li>
+                                        <li>Sube sin impulsarte con el pie de abajo; que la pierna de arriba haga todo el trabajo.</li>
+                                        <li>Baja en cámara lenta (3 segundos para bajar).</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-amber-50 p-4 rounded-xl border border-amber-200">
+                                    <p class="font-bold text-amber-700 mb-1 italic">Señal de error:</p>
+                                    <p class="text-xs">Si dejas caer el cuerpo al bajar, estás perdiendo el 50% del ejercicio. Controlar la bajada es lo que define el músculo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Treadmill Calisthenics -->
+        <section class="mb-16">
+            <div class="flex items-center gap-2 mb-8">
+                <span class="text-3xl">🦾</span>
+                <h2 class="text-2xl font-bold text-slate-800">Calistenia en Agarraderas</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Dips Pro -->
+                <div class="glass-card p-6 bg-navy text-white border-none shadow-xl">
+                    <h4 class="font-bold text-sage mb-3 uppercase tracking-widest text-sm">Fondos Pro</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                        <strong>Técnica:</strong> Sujeta las barras, elévate y cruza los tobillos. Baja flexionando codos hacia atrás.
+                    </p>
+                    <p class="text-[10px] text-terracotta font-bold italic">⚠️ Clave: No dejes que los hombros suban a tus orejas. Cuello largo siempre.</p>
+                </div>
+                <!-- Knee Tucks -->
+                <div class="glass-card p-6 bg-navy text-white border-none shadow-xl">
+                    <h4 class="font-bold text-sage mb-3 uppercase tracking-widest text-sm">Abdomen (Knee Tucks)</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                        <strong>Técnica:</strong> Mantente suspendida con brazos rectos. Lleva rodillas al pecho apretando el abdomen.
+                    </p>
+                    <p class="text-[10px] text-terracotta font-bold italic">⚠️ Clave: Evita balancearte como péndulo. Control total del abdomen.</p>
+                </div>
+                <!-- Isometric Hold -->
+                <div class="glass-card p-6 bg-navy text-white border-none shadow-xl">
+                    <h4 class="font-bold text-sage mb-3 uppercase tracking-widest text-sm">Soporte Isométrico</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                        <strong>Técnica:</strong> Simplemente aguanta arriba con brazos bloqueados y pecho afuera.
+                    </p>
+                    <p class="text-[10px] text-terracotta font-bold italic">⚠️ Clave: Aprieta los glúteos y el abdomen. Es un ejercicio de cuerpo completo.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Extra Options Details -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold mb-8 text-slate-800">Opciones Extra de Tren Superior</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-card p-6">
+                    <h4 class="font-bold text-navy mb-2 italic">Curl de Bíceps + Giro</h4>
+                    <p class="text-xs text-slate-600">Empieza con las pesas a los lados de tus muslos. Al subir, gira las palmas hacia tus hombros. **Punto clave:** Mantén los codos pegados a las costillas, que no se muevan.</p>
+                </div>
+                <div class="glass-card p-6">
+                    <h4 class="font-bold text-navy mb-2 italic">Elevaciones Laterales</h4>
+                    <p class="text-xs text-slate-600">Sube las pesas hacia los lados hasta la altura de los hombros. **Punto clave:** Imagina que estás sirviendo agua de dos jarras (dedo meñique un poco más arriba que el pulgar).</p>
+                </div>
+                <div class="glass-card p-6">
+                    <h4 class="font-bold text-navy mb-2 italic">Plancha con Toque (Shoulder Tap)</h4>
+                    <p class="text-xs text-slate-600">En posición de lagartija, toca tu hombro derecho con mano izquierda. **Punto clave:** La cadera no debe moverse nada. Aprieta las pompas muy fuerte.</p>
+                </div>
+                <div class="glass-card p-6">
+                    <h4 class="font-bold text-navy mb-2 italic">Press de Pecho (Suelo)</h4>
+                    <p class="text-xs text-slate-600">Acostada bocarriba, empuja las pesas hacia arriba. **Punto clave:** Tus codos deben estar a 45 grados de tu cuerpo, no abiertos como una "T". Así proteges el hombro.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Cardio & Impact -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+            <div class="glass-card p-8 bg-navy text-white border-none">
+                <h3 class="font-bold text-sage text-sm uppercase tracking-widest mb-6 text-center">Bicicleta: Cierre de Semana</h3>
+                <div class="flex flex-col items-center justify-center space-y-4">
+                    <div class="text-5xl font-bold text-sage">30 MIN</div>
+                    <div class="text-xl font-bold text-terracotta italic">Resistencia 8 - 9</div>
+                    <p class="text-[10px] text-slate-400 text-center max-w-xs">
+                        Este cardio a nivel 8 es como un masaje profundo para tus muslos. Ayudará a que el dolor baje para el descanso de mañana.
+                    </p>
+                </div>
+            </div>
+            <div class="glass-card p-6 flex flex-col items-center justify-center">
+                <h4 class="text-xs font-bold text-slate-400 uppercase mb-4">Impacto Metabólico</h4>
+                <div class="chart-container">
+                    <canvas id="impactChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Reminder -->
+        <footer class="bg-terracotta text-white rounded-3xl p-8 mb-12 shadow-xl text-center">
+            <h3 class="text-2xl font-bold mb-4 italic">"Misión: Recomposición"</h3>
+            <p class="text-sm text-white/90 leading-relaxed mb-6">
+                No permitas que la inflamación te engañe. Estás construyendo una base sólida. Bebe tu licuado, toma tus vitaminas y prepárate para el descanso activo.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('impactChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Gasto Calórico', 'Tono de Brazos', 'Resistencia 10K', 'Perfilado Rostro'],
+                datasets: [{
+                    data: [9, 10, 8, 10],
+                    backgroundColor: ['#e07a5f', '#3d405b', '#81b29a', '#f2cc8f'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, max: 10, display: false },
+                    x: { grid: { display: false }, ticks: { font: { size: 10, weight: 'bold' } } }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
